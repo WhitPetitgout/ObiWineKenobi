@@ -1,10 +1,28 @@
 
 
 /*main index page*/
+body {
+	background-image: url("http://dashangel.com/wordpress/wp-content/uploads/2015/08/winery_background.jpg");
+}
+
+footer {
+	color: white;
+}
 
 .jumbotron {
 	background-image: url('../images/barrel.jpg');
 	color: white;
+	border-bottom-style: solid;
+	border-bottom-color: black;
+	border-bottom-width: 20px;
+}
+
+h1 {
+	font-size: 75px;
+}
+
+nav {
+	margin-top: 25px;
 }
 
 #sidebar {
@@ -37,4 +55,13 @@
 #image {
 	width: 375px;
 	height: 325px;
+}
+
+#ageScreen,
+#searchScreen,
+#searchResults,
+#aboutUs,
+#contactForm {
+	background-color: white;
+	padding: 25px;
 }
