@@ -5,8 +5,8 @@
 <head>
 	<title>Obi Wine Kenobi</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
-  <link rel="stylesheet" type="text/javascript" href="assets/ObiWine.js">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
@@ -38,7 +38,7 @@
   
 <!--The age confirmation -->
 
-  <div class="container">
+  <div class="container" id="ageScreen">
 
     <h2 class="text-center">Welcome!  Please enter your details below to access the site</h2>
 
@@ -56,7 +56,7 @@
 
         <div class="form-group text-center">
             <button type="submit" class="btn btn-primary" id="submitButton">
-              <div class="glyphicon glyphicon-plus"></div>
+              <div class="fa fa-id-card"></div>
               Submit
             </button>
         </div>
@@ -68,7 +68,7 @@
 
 <!--Search -->
 
-  <div class="container">
+  <div class="container" id="searchScreen">
 
     <h2 class="text-center">Hello <span id="userName">name</span>!  Search for your wine below:</style></h2>
 
@@ -89,13 +89,15 @@
 
 <!--Search Results -->
 
-  <div class="container text-center">
+  <div class="container text-center" id="searchData">
     <table class="table table-hover">
 
       <thead>
         <tr>
-          <th>Wine Name</th>
           <th>Wine Image</th>
+          <th>Wine Name</th>
+          <th>Wine Type</th>
+          <th>Vintage</th>
         </tr>
       </thead> 
 
@@ -105,7 +107,11 @@
 <!--    This is where we will populate the table data from the wine API search
         <tr>
           <td>Wine Name</td>
-          <td>Wine Image</td>
+          <td>
+            <image src="">
+          </td>
+          <th>Wine Type</th>
+          <th>Vintage</th>   
         </tr> -->
 
       </tbody>
@@ -116,7 +122,7 @@
 
 <!-- Wine Detail Page -->
 
-  <div class="container">
+  <div class="container" id="wineInfoPage">
 
       <div class="row">
 
@@ -151,10 +157,13 @@
 
 <!-- footer -->
     <div>
-      <footer class="col-md-12 col-lg-12 col-sm-12 col-xs-12 text-center navbar-fixed-bottom" id="footer">Copyright @ 2018 - Obi-Wine Kenobi</footer>
+      <footer class="col-md-12 col-lg-12 col-sm-12 col-xs-12 text-center navbar-bottom" id="footer">Copyright @ 2018 - Obi-Wine Kenobi</footer>
     </div>
 
 
   </body>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="assets/ObiWine.js"></script>
 
 </html>
