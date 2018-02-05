@@ -1,0 +1,23 @@
+
+
+/*main index page*/
+
+.jumbotron {
+	background-image: url('../images/barrel.jpg');
+	color:#777;
+  
+
+}
+
+#sidebar {
+	float:right;
+}
+
+
+
+
+/*WElcome/age verify page*/
+
+#backgroundwelcome {
+	background-image: url('../images/barrel.jpg');
+}
