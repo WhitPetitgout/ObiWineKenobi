@@ -4,20 +4,37 @@
 
 .jumbotron {
 	background-image: url('../images/barrel.jpg');
-	color:#777;
-  
-
+	color: white;
 }
 
 #sidebar {
 	float:right;
 }
 
-
+.nav-link {
+	color: white; 
+}
 
 
 /*WElcome/age verify page*/
 
 #backgroundwelcome {
 	background-image: url('../images/barrel.jpg');
+}
+
+#wineImage,
+#wineInfo {
+	border-style: solid;
+	float: left;
+	margin: 10px;
+}
+
+#wineImage {
+	width: 380px;
+	padding: 0;
+}
+
+#image {
+	width: 375px;
+	height: 325px;
 }
