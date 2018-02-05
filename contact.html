@@ -28,7 +28,7 @@
               <a class="nav-link" href="about.html">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="contact.html">Contact us</a>
+              <a class="nav-link" href="contact.html">Contact</a>
             </li>
           </ul>
         </nav>
@@ -41,32 +41,43 @@
   <hr>
   
   <div class="container" id="contactForm">
-    <div class="row">
-      <h2>Contact</h2>
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h2>Contact Us</h2>
+      </div>
+
+      <hr>
+
+      <div class="panel-body">
+
+        <form>
+          <div class="form-group">
+            <label for="nameInput">Your Name</label>
+            <input type="text" class="form-control" id="contactName">
+          </div>
+
+          <div class="form-group">
+            <label for="destinationInput">Your Email Address</label>
+            <input type="email" class="form-control" id="contactEmail">
+          </div>
+
+          <div class="form-group">
+            <label for="frequencyInput">Message</label>
+            <textarea type="text" class="form-control" id="contactMessage" rows="4"></textarea>
+          </div>
+
+          <div class="form-group text-center">
+            <button type="submit" class="btn btn-primary" id="contactSubmit">
+            <div class="fa fa-envelope"></div>
+            Submit
+            </button>
+          </div>
+        </form>
+        
+      </div>
+      
     </div>
-    
-    <hr>
-      <form>
-        <ul>
-          <div>
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name" placeholder="John Smith" required="required">
-          </div>
-          <div>
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="example@gmail.com" required="required">
-          </div>
-          <div>
-            <label for="message">Message</label>
-            <textarea id="message" name="message" required="required"></textarea>
-          </div>
-          <div>
-            <input type="submit" class="submit">
-          </div>
-      </form>
-
   </div>
-
 
 <!-- footer -->
     <div>

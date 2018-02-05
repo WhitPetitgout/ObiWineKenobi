@@ -57,11 +57,17 @@ nav {
 	height: 325px;
 }
 
+#searchData {
+	margin-top: 20px;
+}
+
 #ageScreen,
 #searchScreen,
 #searchResults,
 #aboutUs,
-#contactForm {
+#contactForm,
+#searchData {
 	background-color: white;
 	padding: 25px;
+	border-radius: 25px;
 }
