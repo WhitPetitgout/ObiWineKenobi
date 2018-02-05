@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  	<meta charset="utf-8">
+  	<title>Wine API Search</title>
+</head>
+
+<body>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+
+    	var queryURL = "http://api.snooth.com/wines/?akey=ncs5n8ji7da3tqv033d1or3daisn244rq6utp037mtx3ogpi&ip=66.28.234.115&t=wine&q=kendall+jackson"
+      //var queryURL = "http://api.snooth.com/wines/?akey=ncs5n8ji7da3tqv033d1or3daisn244rq6utp037mtx3ogpi&ip=66.28.234.115&t=wine&q=" + search term
+
+
+      var wineryURL = "http://api.snooth.com/winery/?akey=ncs5n8ji7da3tqv033d1or3daisn244rq6utp037mtx3ogpi&ip=66.28.234.115&id=kendall-jackson"
+      //var wineryURL = "http://api.snooth.com/winery/?akey=ncs5n8ji7da3tqv033d1or3daisn244rq6utp037mtx3ogpi&ip=66.28.234.115&id=" + winery_id variable from query1
+
+      var wineDetailURL = "http://api.snooth.com/wine/?akey=ncs5n8ji7da3tqv033d1or3daisn244rq6utp037mtx3ogpi&ip=66.28.234.115&id=kendall-jackson-zinfandel-california-2006-1&food=1&photos=1"
+      //var wineDetailURL = "http://api.snooth.com/wine/?akey=ncs5n8ji7da3tqv033d1or3daisn244rq6utp037mtx3ogpi&ip=66.28.234.115&id=" + code from query1
+
+      var textSpeechURL = "http://api.voicerss.org/?key=a2833f41ad5743d3bfbb43f822503d1c&hl=en-us&b64=true&src=Hello, world!"
+      //var textSpeechURL = "http://api.voicerss.org/?key=a2833f41ad5743d3bfbb43f822503d1c&hl=en-us&b64=true&src=" + string variable
+
+      var weatherURL = ""
+
+
+    	$(document).ready(function() {
+
+		    	$.ajax({
+		    		url: queryURL,
+		    		method: "GET"
+		    	}).then(function(response) {
+		    		console.log(JSON.parse(response));
+
+		    	})
+
+
+          $.ajax({
+            url: wineryURL,
+            method: "GET"
+          }).then(function(response) {
+            console.log(JSON.parse(response));
+
+          })
+
+          $.ajax({
+            url: wineDetailURL,
+            method: "GET"
+          }).then(function(response) {
+            console.log(JSON.parse(response));
+
+          })
+
+          $.ajax({
+            url: textSpeechURL,
+            method: "GET"
+          }).then(function(response) {
+            console.log(response);
+
+            var audioElement = document.createElement("audio");
+            audioElement.setAttribute("src", response);
+            audioElement.play();
+
+
+          })
+
+
+
+    	});
+
+
+
+
+    </script>
+  </div>
+</body>
+
+</html>
