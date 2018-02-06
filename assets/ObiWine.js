@@ -5,7 +5,9 @@ $(document).ready(function() {
 	var name = "";
 	var age = "";
 	var favoriteWines = [];
+	
 //functions
+
 
 
 
@@ -34,10 +36,6 @@ $(document).ready(function() {
 	$("#favoritesPage").hide();
 
 	}
-
-
-
-
 
 
 	//2.Age check
