@@ -85,3 +85,8 @@ nav {
 	float: right;
 }
 
+#gifDisplay {
+	border-style: solid;
+	float: left;
+}
+

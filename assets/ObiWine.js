@@ -5,6 +5,10 @@ $(document).ready(function() {
 	var name = "";
 	var age = "";
 	var favoriteWines = [];
+	var description = "";
+	var isPlaying = false;
+	var audioElement = "";
+	var image = "";
 
 //functions
 
@@ -164,13 +168,13 @@ $(document).ready(function() {
 
 
 		//save necessary API variables here and then write to page
-			var image = parsedData.wines[0].image;
+			image = parsedData.wines[0].image;
 			var name = parsedData.wines[0].name;
 			var type = parsedData.wines[0].varietal;
 			var vintage = parsedData.wines[0].vintage;
 			var avgprice = parsedData.wines[0].price;
 			var region = parsedData.wines[0].region;
-			var description = parsedData.wines[0].wm_notes;
+			description = parsedData.wines[0].wm_notes;
 			var food0 = parsedData.wines[0].recipes[0].name;
 			var food1 = parsedData.wines[0].recipes[1].name;
 			var food2 = parsedData.wines[0].recipes[2].name;
@@ -196,22 +200,101 @@ $(document).ready(function() {
 
 			$("#wine-review").append(review);
 
-	    //5. Text to Speech on wine detail page (nest within a timeout to start after click, or we can do it on click of a button)
+	    // 5. Text to Speech on wine detail page (nest within a timeout to start after click, or we can do it on click of a button)
+			var textSpeechURL = "http://api.voicerss.org/?key=a2833f41ad5743d3bfbb43f822503d1c&hl=en-gb&b64=true&src=" + description;
 
-      		var textSpeechURL = "http://api.voicerss.org/?key=a2833f41ad5743d3bfbb43f822503d1c&hl=en-us&b64=true&src=" + description;
+		    $.ajax({
+		        url: textSpeechURL,
+		        method: "GET"
+		    }).then(function(response) {
+		        console.log(response);
 
-	    	$.ajax({
-	            url: textSpeechURL,
-	            method: "GET"
-	        }).then(function(response) {
-	            console.log(response);
+		        audioElement = document.createElement("audio");
+		        audioElement.setAttribute("src", response);
 
-	          	var audioElement = document.createElement("audio");
-	            audioElement.setAttribute("src", response);
-	            audioElement.play();
+		     });
 
-          })
+	    	$("#playButton").on("click", function(event) {
+				
+				event.preventDefault();
 
+		      	var state = $(this).attr("data-state");
+
+
+		        if (state == "stopped") {
+
+		            	audioElement.play();
+		      			$(this).attr("data-state", "playing");
+
+			       	if (audioElement.duration > 0 && !audioElement.paused) {
+
+			       		var newDiv = $("<img src='https://media.giphy.com/media/VtB1RvWAZVauc/giphy.gif' width='100%'>");
+		      			$("#wine-image").html(newDiv);
+
+					} else {
+
+		      			$(this).attr("data-state", "stopped");
+		      			$("#wine-image").html("<img src='" + image + "' width='100%'>");
+
+					}
+
+
+		       	} else if (state == "playing") {
+
+		            audioElement.pause();
+		      		$(this).attr("data-state", "stopped");
+		      		$("#wine-image").html("<img src='" + image + "' width='100%'>");
+		       	}
+
+
+
+
+
+		    });
+
+
+
+
+
+
+	   //  	$("#playButton").on("click", function(event) {
+				
+				// event.preventDefault();
+
+	   //    		var textSpeechURL = "http://api.voicerss.org/?key=a2833f41ad5743d3bfbb43f822503d1c&hl=en-gb&b64=true&src=" + description;
+
+	   //    		var that = this;
+
+		  //   	$.ajax({
+		  //           url: textSpeechURL,
+		  //           method: "GET"
+		  //       }).then(function(response) {
+		  //           console.log(response);
+
+		  //         	audioElement = document.createElement("audio");
+		  //           audioElement.setAttribute("src", response);
+
+		  //           console.log(that);
+
+		  //     		var state = $(that).attr("data-state");
+
+
+		  //           if (state == "stopped") {
+		  //           	alert("play");
+		  //           	audioElement.play();
+		  //     			$(that).attr("data-state", "playing");
+
+		  //       	} else if (state == "playing") {
+		  //           	alert("pause");
+
+		  //           	audioElement.pause();
+		  //     			$(that).attr("data-state", "stopped");
+
+		  //       	}
+
+	   //        	})
+
+		  //   });
 
 
 
