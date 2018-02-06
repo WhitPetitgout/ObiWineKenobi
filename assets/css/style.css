@@ -5,9 +5,6 @@ body {
 	background-image: url("http://dashangel.com/wordpress/wp-content/uploads/2015/08/winery_background.jpg");
 }
 
-footer {
-	color: white;
-}
 
 .jumbotron {
 	background-image: url('../images/barrel.jpg');
@@ -42,19 +39,23 @@ nav {
 
 #wineImage,
 #wineInfo {
-	border-style: solid;
 	float: left;
-	margin: 10px;
+	margin: 5px;
 }
 
-#wineImage {
-	width: 380px;
-	padding: 0;
+#additionalInfo {
+	margin: 20px;
+}
+
+#wineInfo {
+	width: auto;
+	float: right;
+	padding: 5px;
 }
 
 #image {
-	width: 375px;
-	height: 325px;
+	width: 350px;
+	height: 350px;
 }
 
 #searchData,

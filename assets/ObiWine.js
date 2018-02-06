@@ -201,7 +201,7 @@ $(document).ready(function() {
 				//if fav boolean for this wine is true then....
 				//else if false....
 
-			//push wine code to the array
+			//push wine code value to the array
 			//store array as a string in local storage
 				//localStorage.setItem()
 
