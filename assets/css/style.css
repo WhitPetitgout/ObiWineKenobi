@@ -68,8 +68,13 @@ nav {
 #aboutUs,
 #contactForm,
 #searchData,
-#wineInfoPage {
+#wineInfoPage,
+#favoritesPage {
 	background-color: white;
 	padding: 25px;
 	border-radius: 25px;
+}
+
+#favoriteButton {
+	float: right;
 }

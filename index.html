@@ -23,6 +23,9 @@
             <li class="nav-item">
               <a class="nav-link" href="index.html">Search</a>
             </li>
+            <li class="nav-item" id="favoritesPageButton">
+              <a class="nav-link" href="index.html">Favorites</a>
+            </li>
             <li class="nav-item">
               <a class="nav-link" href="about.html">About</a>
             </li>
@@ -135,6 +138,10 @@
             <div class="fa fa-undo"></div>
             Back To Search
           </button>
+          <button type="submit" class="btn btn-default" id="favoriteButton">
+            <div class="fa fa-star"></div>
+            Save this wine as a Favorite
+          </button>
         </div>  
         
         <hr>
@@ -158,9 +165,47 @@
 
 
 
-<!--sidebar starts here-->
+<!--Favorites Page-->
+
+<div class="container text-center" id="favoritesPage">
+
+  <div class="panel-heading">
+    <h2 class="panel-title">
+      <span id="userName"></span>
+      Your Favorite Wines
+    </h2>
+  </div>
+
+  <hr>
+
+  <table class="table table-hover">
+
+    <thead>
+      <tr>
+        <th>Wine Image</th>
+        <th>Wine Name</th>
+        <th>Wine Type</th>
+        <th>Vintage</th>
+      </tr>
+    </thead> 
+
+    <tbody id="favoritesPageData">
 
 
+<!--    This is where we will populate the table data from the wine API search
+        <tr>
+          <td>Wine Name</td>
+          <td>
+            <image src="">
+          </td>
+          <th>Wine Type</th>
+          <th>Vintage</th>   
+        </tr> -->
+
+    </tbody>
+      
+  </table>
+</div>
 
 
 
