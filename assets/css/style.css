@@ -25,8 +25,8 @@ nav {
 	margin-top: 25px;
 }
 
-#sidebar {
-	float:right;
+#userName {
+	text-transform: capitalize;
 }
 
 .nav-link {
@@ -57,7 +57,8 @@ nav {
 	height: 325px;
 }
 
-#searchData {
+#searchData,
+#wineInfoPage {
 	margin-top: 20px;
 }
 
@@ -66,7 +67,8 @@ nav {
 #searchResults,
 #aboutUs,
 #contactForm,
-#searchData {
+#searchData,
+#wineInfoPage {
 	background-color: white;
 	padding: 25px;
 	border-radius: 25px;
