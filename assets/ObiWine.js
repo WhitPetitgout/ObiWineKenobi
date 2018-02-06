@@ -5,7 +5,7 @@ $(document).ready(function() {
 	var name = "";
 	var age = "";
 	var favoriteWines = [];
-	
+
 //functions
 
 
@@ -120,6 +120,13 @@ $(document).ready(function() {
   	
    		$("#wineInfoPage").show();
 
+
+   		$("#winery-image, #winery-name").text("");
+   		$("#wine-name, #wine-type, #wine-year, #wine-price, #wine-location, #wine-description, #food1, #food2, #food3, #wine-review").text("");
+
+
+
+
 	   	var winery = $(this).attr("winery-id");
 	   	var wine = $(this).attr("wine-code");
 
@@ -136,10 +143,12 @@ $(document).ready(function() {
 
 
 		//save necessary API variables here, and then write to page
+			var wineryImg = parsedData.winery.image;
+			var wineryName = parsedData.winery.name;
+			var wineryURL = parsedData.winery.url;
 
-
-
-
+			$("#winery-image").html("<img src='" + wineryImg + "' width='100%'>");
+			$("#winery-name").html("<a href='" + wineryURL + "' target='_blank'>" + wineryName + "</a>");
 
 
 
@@ -155,10 +164,53 @@ $(document).ready(function() {
 
 
 		//save necessary API variables here and then write to page
+			var image = parsedData.wines[0].image;
+			var name = parsedData.wines[0].name;
+			var type = parsedData.wines[0].varietal;
+			var vintage = parsedData.wines[0].vintage;
+			var avgprice = parsedData.wines[0].price;
+			var region = parsedData.wines[0].region;
+			var description = parsedData.wines[0].wm_notes;
+			var food0 = parsedData.wines[0].recipes[0].name;
+			var food1 = parsedData.wines[0].recipes[1].name;
+			var food2 = parsedData.wines[0].recipes[2].name;
+			var food0URL = parsedData.wines[0].recipes[0].source_link;
+			var food1URL = parsedData.wines[0].recipes[1].source_link;
+			var food2URL = parsedData.wines[0].recipes[2].source_link;
+			var review = parsedData.wines[0].snoothrank
+
+			console.log(review);
 
 
+			$("#wine-image").html("<img src='" + image + "' width='100%'>")
 
+			$("#wine-name").text(name);
+			$("#wine-type").text(type);
+			$("#wine-year").text(vintage);
+			$("#wine-price").text(avgprice);
+			$("#wine-location").text(region);
+			$("#wine-description").text(description);
+			$("#food1").html("<a href='" + food0URL + "' target='_blank'>" + food0 + "</a>");
+			$("#food2").html("<a href='" + food1URL + "' target='_blank'>" + food1 + "</a>");
+			$("#food3").html("<a href='" + food2URL + "' target='_blank'>" + food2 + "</a>");
 
+			$("#wine-review").append(review);
+
+	    //5. Text to Speech on wine detail page (nest within a timeout to start after click, or we can do it on click of a button)
+
+      		var textSpeechURL = "http://api.voicerss.org/?key=a2833f41ad5743d3bfbb43f822503d1c&hl=en-us&b64=true&src=" + description;
+
+	    	$.ajax({
+	            url: textSpeechURL,
+	            method: "GET"
+	        }).then(function(response) {
+	            console.log(response);
+
+	          	var audioElement = document.createElement("audio");
+	            audioElement.setAttribute("src", response);
+	            audioElement.play();
+
+          })
 
 
 
@@ -166,7 +218,7 @@ $(document).ready(function() {
         })
 
 
-	    //5. Back Button
+	    //6. Back Button
 	    	//within the wineDetail page, there is an onclick for the back button to show previous search results
 	    $("#backButton").on("click", function(event) {
 			event.preventDefault();
@@ -234,30 +286,7 @@ $(document).ready(function() {
 	//9. Contact Page Submit Click functionality 
 		//(Maybe make it send the details as an email to 3 group members when submitted)
 
-
-
-
-
-
-
-
-
-
-
 	//10. Other functionalities?
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
