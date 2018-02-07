@@ -4,13 +4,13 @@ body {
 }
 
 .headerRow {
-	background-color: rgba(0, 0, 0, .5);
+	background-color: rgba(255, 255, 255, .6);
 	border-radius: 25px;
 }
 
 .jumbotron {
 	background-image: url('../images/barrel.jpg');
-	color: white;
+	color: black;
 	border-bottom-style: solid;
 	border-bottom-color: black;
 	border-bottom-width: 20px;
@@ -29,7 +29,7 @@ nav {
 }
 
 .nav-link {
-	color: white; 
+	color: black; 
 }
 
 
@@ -79,7 +79,7 @@ nav {
 #favoritesPage {
 	background-color: white;
 	padding: 25px;
-	border-radius: 50px 50px 15px 15px;
+	border-radius: 15px 15px 50px 50px;
 }
 
 #backButton,

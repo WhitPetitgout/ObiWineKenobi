@@ -232,6 +232,8 @@ $(document).ready(function() {
 				event.preventDefault();
 
 		      	var state = $(this).attr("data-state");
+		      	var gifs = ["https://media.giphy.com/media/VtB1RvWAZVauc/giphy.gif", "https://media.giphy.com/media/I8xRafzsDKvUQ/giphy.gif", "https://media.giphy.com/media/kvCKFerORxlAI/giphy.gif"];
+		      	var randomGifURL = gifs[Math.floor(Math.random() * gifs.length)]
 
 
 		        if (state == "stopped") {
@@ -241,7 +243,7 @@ $(document).ready(function() {
 
 			       	if (audioElement.duration > 0 && !audioElement.paused) {
 
-			       		var newDiv = $("<img src='https://media.giphy.com/media/VtB1RvWAZVauc/giphy.gif' width='100%' id='gifImage'>");
+			       		var newDiv = $("<img src='" + randomGifURL + "' width='100%' id='gifImage'>");
 		      			$("#wine-image").html(newDiv);
 
 					} else {
@@ -314,7 +316,7 @@ $(document).ready(function() {
 			}
 
 			favorites.push(newFav);
-			console.log(favorites); //why is this adding extra items sometimes??
+			console.log(favorites); //why is this adding clearing items sometimes??
 
 			var favString = JSON.stringify(favorites);
 			localStorage.setItem("favorites", favString);
@@ -341,9 +343,11 @@ $(document).ready(function() {
 		var favArray = JSON.parse(storedFavorites);
 		// console.log(favArray);
 
+		$("#favoritesPageData").empty();		
+
 		for (var i = 0; i < favArray.length; i++) {
 
-		   	$("#favoritesPageData").append("<tr id='resultLine' winery-id='" + favArray[i].favWineryCode + "' wine-code='" + favArray[i].favWineCode + "'><td><image src='" + favArray[i].favWineImageURL + "'/></td><td>" + favArray[i].favWineName + "</td><td>" + favArray[i].favWineType + "</td><td>" + favArray[i].favWineVintage + "</td></tr>")
+		   	$("#favoritesPageData").append("<tr id='resultLine' winery-id='" + favArray[i].favWineryCode + "' wine-code='" + favArray[i].favWineCode + "'><td><image src='" + favArray[i].favWineImageURL + "'/></td><td>" + favArray[i].favWineName + "</td><td>" + favArray[i].favWineType + "</td><td>" + favArray[i].favWineVintage + "</td><td><button class='btn btn-danger col-md-4 col-md-offset-2 col-xs-4 col-xs-offset-2 col-sm-4 col-sm-offset-2 col-lg-4 col-lg-offset-2' id='deleteFav' data-id=" + favArray[i].favWineCode + "><span class='fa fa-minus'></span></button></td></tr>")
 
 		}
 
@@ -352,11 +356,66 @@ $(document).ready(function() {
 
 
 
+	//9. Click event for remove favorties
 
-	//9. Contact Page Submit Click functionality 
+	$("table").on("click", "#deleteFav", function(event) {
+		event.preventDefault();
+
+		//set var to the confirm question boolean
+		var x = confirm("Are you sure you want to delete this Wine from Favorites?");
+
+		//if delete confirmed
+		if (x) {
+
+		    //set the id equal to the data-id we set
+		    var id = $(this).attr("data-id")
+
+		    //look for the clicked items tr parent (table row), and remove it
+		    //parents looks multiple levels, parent() looks 1 level
+		    $(this).parents("tr").remove();
+
+		    //remove item with this id from the favorites array
+
+		    //favorites.pop(id);
+
+
+
+
+
+
+
+		    //Re store the new favorites array without that item in local storage
+
+			console.log(favorites);
+
+			var favString = JSON.stringify(favorites);
+			localStorage.setItem("favorites", favString);
+
+			//clear page and then populate from the local storage.
+			var storedFavorites = localStorage.getItem("favorites");
+			var favArray = JSON.parse(storedFavorites);
+			// console.log(favArray);
+			$("#favoritesPageData").empty();		
+
+			for (var i = 0; i < favArray.length; i++) {
+
+			   	$("#favoritesPageData").append("<tr id='resultLine' winery-id='" + favArray[i].favWineryCode + "' wine-code='" + favArray[i].favWineCode + "'><td><image src='" + favArray[i].favWineImageURL + "'/></td><td>" + favArray[i].favWineName + "</td><td>" + favArray[i].favWineType + "</td><td>" + favArray[i].favWineVintage + "</td><td><button class='btn btn-danger col-md-4 col-md-offset-2 col-xs-4 col-xs-offset-2 col-sm-4 col-sm-offset-2 col-lg-4 col-lg-offset-2' id='deleteFav' data-id=" + favArray[i].favWineCode + "><span class='fa fa-minus'></span></button></td></tr>")
+
+				}
+
+		//else, if delete is not confirmed
+		} else {
+		    console.log("employee NOT deleted");
+		}
+
+
+	});
+
+
+	//10. Contact Page Submit Click functionality 
 		//(Maybe make it send the details as an email to 3 group members when submitted)
 
-	//10. Other functionalities?
+	//11. Other functionalities?
 
 
 
