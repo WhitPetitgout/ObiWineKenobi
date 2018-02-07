@@ -242,44 +242,6 @@ $(document).ready(function() {
 
 		     });
 
-	    	$("#playButton").on("click", function(event) {
-				
-				event.preventDefault();
-
-		      	var state = $(this).attr("data-state");
-		      	var gifs = ["https://media.giphy.com/media/VtB1RvWAZVauc/giphy.gif", "https://media.giphy.com/media/I8xRafzsDKvUQ/giphy.gif", "https://media.giphy.com/media/kvCKFerORxlAI/giphy.gif", "https://media.giphy.com/media/xT8qB7uH9tsDIqW9Es/giphy.gif"];
-		      	var randomGifURL = gifs[Math.floor(Math.random() * gifs.length)]
-
-
-		        if (state == "stopped") {
-
-		            	audioElement.play();
-		      			$(this).attr("data-state", "playing");
-
-			       	if (audioElement.duration > 0 && !audioElement.paused) {
-
-			       		var newDiv = $("<img src='" + randomGifURL + "' width='100%' id='gifImage'>");
-		      			$("#wine-image").html(newDiv);
-
-					} else {
-
-		      			$(this).attr("data-state", "stopped");
-		      			$("#wine-image").html("<img src='" + image + "' width='100%'>");
-
-					}
-
-
-		       	} else if (state == "playing") {
-
-		            audioElement.pause();
-		      		$(this).attr("data-state", "stopped");
-		      		$("#wine-image").html("<img src='" + image + "' width='100%'>");
-		       	}
-
-
-
-		    });
-
 
         })
 
@@ -307,6 +269,45 @@ $(document).ready(function() {
 
 
 	});
+	
+
+	$("#playButton").on("click", function(event) {
+				
+		event.preventDefault();
+
+		var state = $(this).attr("data-state");
+	  	var gifs = ["https://media.giphy.com/media/VtB1RvWAZVauc/giphy.gif", "https://media.giphy.com/media/kvCKFerORxlAI/giphy.gif", "https://media.giphy.com/media/xT8qB7uH9tsDIqW9Es/giphy.gif"];
+	  	var randomGifURL = gifs[Math.floor(Math.random() * gifs.length)]
+
+
+		if (state == "stopped") {
+
+		    audioElement.play();
+		    $(this).attr("data-state", "playing");
+
+			if (audioElement.duration > 0 && !audioElement.paused) {
+
+				var newDiv = $("<img src='" + randomGifURL + "' width='100%' id='gifImage'>");
+			    $("#wine-image").html(newDiv);
+
+			} else {
+
+			    $(this).attr("data-state", "stopped");
+			    $("#wine-image").html("<img src='" + image + "' width='100%'>");
+
+			}
+
+
+		} else if (state == "playing") {
+
+		    audioElement.pause();
+		    $(this).attr("data-state", "stopped");
+		    $("#wine-image").html("<img src='" + image + "' width='100%'>");
+		}
+
+
+
+	});
 
 	//7. Wine Info Page "Add as Favorite Wine button" could go here if we do that (with local storage)
 
@@ -327,7 +328,7 @@ $(document).ready(function() {
 				favWineType: favWineType,
 				favWineVintage: favWineVintage,
 				favWineryCode: favWineryCode,
-				favWineCode: favWineCode			
+				favWineCode: favWineCode
 			}
 
 			favorites.push(newFav);
@@ -405,26 +406,29 @@ $(document).ready(function() {
 
 			var objIndex = findIndexByKey(favorites, 'favWineCode', id);
 			console.log(objIndex);
-			// favorites.splice(objIndex, 1);
+			var a = favorites.indexOf(objIndex);
+			console.log(a)
 
-		 //    //Re store the new favorites array without that item in local storage
+			favorites.splice(a, 1);
 
-			// console.log(favorites);
+		    //Re store the new favorites array without that item in local storage
 
-			// var favString = JSON.stringify(favorites);
-			// localStorage.setItem("favorites", favString);
+			console.log(favorites);
 
-			// //clear page and then populate from the local storage.
-			// var storedFavorites = localStorage.getItem("favorites");
-			// var favArray = JSON.parse(storedFavorites);
-			// // console.log(favArray);
-			// $("#favoritesPageData").empty();		
+			var favString = JSON.stringify(favorites);
+			localStorage.setItem("favorites", favString);
 
-			// for (var i = 0; i < favArray.length; i++) {
+			//clear page and then populate from the local storage.
+			var storedFavorites = localStorage.getItem("favorites");
+			var favArray = JSON.parse(storedFavorites);
+			// console.log(favArray);
+			$("#favoritesPageData").empty();		
 
-			//    	$("#favoritesPageData").append("<tr id='resultLine' winery-id='" + favArray[i].favWineryCode + "' wine-code='" + favArray[i].favWineCode + "'><td><image src='" + favArray[i].favWineImageURL + "'/></td><td>" + favArray[i].favWineName + "</td><td>" + favArray[i].favWineType + "</td><td>" + favArray[i].favWineVintage + "</td><td><button class='btn btn-danger col-md-4 col-md-offset-2 col-xs-4 col-xs-offset-2 col-sm-4 col-sm-offset-2 col-lg-4 col-lg-offset-2' id='deleteFav' data-id=" + favArray[i].favWineCode + "><span class='fa fa-minus'></span></button></td></tr>")
+			for (var i = 0; i < favArray.length; i++) {
 
-			// 	}
+			   	$("#favoritesPageData").append("<tr id='resultLine' winery-id='" + favArray[i].favWineryCode + "' wine-code='" + favArray[i].favWineCode + "'><td><image src='" + favArray[i].favWineImageURL + "'/></td><td>" + favArray[i].favWineName + "</td><td>" + favArray[i].favWineType + "</td><td>" + favArray[i].favWineVintage + "</td><td><button class='btn btn-danger col-md-4 col-md-offset-2 col-xs-4 col-xs-offset-2 col-sm-4 col-sm-offset-2 col-lg-4 col-lg-offset-2' id='deleteFav' data-id=" + favArray[i].favWineCode + "><span class='fa fa-minus'></span></button></td></tr>")
+
+				}
 
 		//else, if delete is not confirmed
 		} else {
