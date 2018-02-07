@@ -14,14 +14,12 @@ body {
 	border-bottom-style: solid;
 	border-bottom-color: black;
 	border-bottom-width: 20px;
-	
 }
 
-.jumbotron h1{
-	font-family: Satisfy;
+.jumbotron h1 {
+	font-family:  Satisfy;
 	font-size: 600%;
 }
-
 
 nav {
 	margin-top: 15px;
