@@ -107,3 +107,12 @@ footer {
 #gifImage {
 	border-radius: 50%;
 }
+.modal-content {
+	position:center;
+	text-align:center;
+	background-color:maroon;
+	color:white;
+	height: 80%;
+	width:40%;
+	z-index:100;
+}

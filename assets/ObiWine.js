@@ -15,6 +15,18 @@ $(document).ready(function() {
 	var code = "";
 	var winerySearchID = "";
 	var favorites = [];
+    var modal= {
+    	ofAge:function(){
+          $("#modal1").html("<p>Welcome, Jedi! Please enjoy responsibly.</p>");
+
+		},
+    	tooYoung:function(){
+           $("#modal1").html("<p>Please come back when you are of age, young Jedi!</p>");
+    	}
+    	
+
+    	
+    };
 
 //functions
 
@@ -58,7 +70,9 @@ $(document).ready(function() {
 	  	age = $("#ageInput").val().trim();
 
 	if (age >= 21) {
-		alert("Congratulations, Jedi " + username + ", you are of legal age to enjoy this website!");
+		//alert("Congratulations, Jedi " + username + ", you are of legal age to enjoy this website!");
+
+		modal.ofAge();
 
       	localStorage.setItem("name", username);
       	localStorage.setItem("age", age);
@@ -70,7 +84,8 @@ $(document).ready(function() {
 	}
 
 	 else {age=== false;
-	 	alert("Please come back when you are 21 or older, young Jedi!")
+	 	//alert("Please come back when you are 21 or older, young Jedi!")
+	 	modal.tooYoung();
 	    }
 
 	});
