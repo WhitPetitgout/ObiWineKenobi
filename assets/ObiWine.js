@@ -157,10 +157,14 @@ $(document).ready(function() {
 			var wineryImg = parsedData.winery.image;
 			var wineryName = parsedData.winery.name;
 			var wineryURL = parsedData.winery.url;
+			var wineryCountry = parsedData.winery.country;
+			var wineryNumWines = parsedData.winery.num_wines;
+
 
 			$("#winery-image").html("<img src='" + wineryImg + "' width='100%'>");
 			$("#winery-name").html("<a href='" + wineryURL + "' target='_blank'>" + wineryName + "</a>");
-
+			$("#winery-country").text(wineryCountry);
+			$("#winery-numberWines").text(wineryNumWines);
 
 
 	    })
@@ -237,7 +241,7 @@ $(document).ready(function() {
 
 			       	if (audioElement.duration > 0 && !audioElement.paused) {
 
-			       		var newDiv = $("<img src='https://media.giphy.com/media/VtB1RvWAZVauc/giphy.gif' width='100%'>");
+			       		var newDiv = $("<img src='https://media.giphy.com/media/VtB1RvWAZVauc/giphy.gif' width='100%' id='gifImage'>");
 		      			$("#wine-image").html(newDiv);
 
 					} else {
