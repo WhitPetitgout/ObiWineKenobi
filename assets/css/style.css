@@ -1,21 +1,22 @@
 
-
-/*main index page*/
 body {
 	background-image: url("http://dashangel.com/wordpress/wp-content/uploads/2015/08/winery_background.jpg");
 }
 
+.headerRow {
+	background-color: silver;
+	border-radius: 25px;
+}
 
 .jumbotron {
 	background-image: url('../images/barrel.jpg');
-	color: white;
 	border-bottom-style: solid;
 	border-bottom-color: black;
 	border-bottom-width: 20px;
 }
 
 h1 {
-	font-size: 75px;
+	font-size: 500%;
 }
 
 nav {
@@ -27,11 +28,9 @@ nav {
 }
 
 .nav-link {
-	color: white; 
+	color: black; 
 }
 
-
-/*WElcome/age verify page*/
 
 #backgroundwelcome {
 	background-image: url('../images/barrel.jpg');
@@ -44,12 +43,14 @@ nav {
 }
 
 #additionalInfo {
-	margin: 20px;
+	display: block;
+	margin: auto;
+	font-size: 125%;
 }
 
 #wineInfo {
 	width: auto;
-	float: right;
+	float: left;
 	padding: 5px;
 }
 
@@ -90,3 +91,6 @@ nav {
 	float: left;
 }
 
+footer {
+	color: white;
+}

@@ -2,13 +2,19 @@ $(document).ready(function() {
 
 //Global var
 	var userSearch = "";
-	var name = "";
+	var username = "";
 	var age = "";
 	var favoriteWines = [];
 	var description = "";
 	var isPlaying = false;
 	var audioElement = "";
+	var name = "";
 	var image = "";
+	var type = "";
+	var vintage = "";
+	var code = "";
+	var winerySearchID = "";
+	var favorites = [];
 
 //functions
 
@@ -47,14 +53,14 @@ $(document).ready(function() {
 	$("#submitButton").on("click", function(event) {
 	    event.preventDefault();
 
-	    name = $("#nameInput").val().trim();
+	    username = $("#nameInput").val().trim();
 
 	  	age = $("#ageInput").val().trim();
 
 	if (age >= 21) {
-		alert("Congratulations, Jedi " + name + ", you are of legal age to enjoy this website!");
+		alert("Congratulations, Jedi " + username + ", you are of legal age to enjoy this website!");
 
-      	localStorage.setItem("name", name);
+      	localStorage.setItem("name", username);
       	localStorage.setItem("age", age);
 
 		$("#ageScreen").hide();
@@ -120,7 +126,8 @@ $(document).ready(function() {
 	$(document).on("click", "#resultLine", function(event) {
 
 	 	$("#searchData").hide();
-	 	$("#searchScreen").hide();  	
+	 	$("#searchScreen").hide(); 
+	 	$("#favoritesPage").hide(); 	
   	
    		$("#wineInfoPage").show();
 
@@ -169,9 +176,9 @@ $(document).ready(function() {
 
 		//save necessary API variables here and then write to page
 			image = parsedData.wines[0].image;
-			var name = parsedData.wines[0].name;
-			var type = parsedData.wines[0].varietal;
-			var vintage = parsedData.wines[0].vintage;
+			name = parsedData.wines[0].name;
+			type = parsedData.wines[0].varietal;
+			vintage = parsedData.wines[0].vintage;
 			var avgprice = parsedData.wines[0].price;
 			var region = parsedData.wines[0].region;
 			description = parsedData.wines[0].wm_notes;
@@ -182,6 +189,8 @@ $(document).ready(function() {
 			var food1URL = parsedData.wines[0].recipes[1].source_link;
 			var food2URL = parsedData.wines[0].recipes[2].source_link;
 			var review = parsedData.wines[0].snoothrank
+			code = parsedData.wines[0].code;
+			winerySearchID = parsedData.wines[0].winery_id;
 
 			console.log(review);
 
@@ -248,54 +257,7 @@ $(document).ready(function() {
 
 
 
-
-
 		    });
-
-
-
-
-
-
-	   //  	$("#playButton").on("click", function(event) {
-				
-				// event.preventDefault();
-
-	   //    		var textSpeechURL = "http://api.voicerss.org/?key=a2833f41ad5743d3bfbb43f822503d1c&hl=en-gb&b64=true&src=" + description;
-
-	   //    		var that = this;
-
-		  //   	$.ajax({
-		  //           url: textSpeechURL,
-		  //           method: "GET"
-		  //       }).then(function(response) {
-		  //           console.log(response);
-
-		  //         	audioElement = document.createElement("audio");
-		  //           audioElement.setAttribute("src", response);
-
-		  //           console.log(that);
-
-		  //     		var state = $(that).attr("data-state");
-
-
-		  //           if (state == "stopped") {
-		  //           	alert("play");
-		  //           	audioElement.play();
-		  //     			$(that).attr("data-state", "playing");
-
-		  //       	} else if (state == "playing") {
-		  //           	alert("pause");
-
-		  //           	audioElement.pause();
-		  //     			$(that).attr("data-state", "stopped");
-
-		  //       	}
-
-	   //        	})
-
-		  //   });
-
 
 
         })
@@ -306,60 +268,81 @@ $(document).ready(function() {
 	    $("#backButton").on("click", function(event) {
 			event.preventDefault();
 
+		    $("#playButton").attr("data-state", "stopped");
+		    $("#wine-image").html("<img src='" + image + "' width='100%'>");
+
 		 	$("#searchData").show();
 		 	$("#searchScreen").show();		 		  	
 	   		$("#wineInfoPage").hide();
+			
+			if (audioElement.duration > 0 && !audioElement.paused) {
+				audioElement.pause();
+			}
 
 	   	});
 
 
-	    //6. Text to Speech on wine detail page (nest within a timeout to start after click, or we can do it on click of a button)
 
-
-
-
-
-
-
-
-
-
-
-	    //7. Wine Info Page "Add as Favorite Wine button" could go here if we do that (with local storage)
-
-	    $("#favoriteButton").on("click", function(event) {
-			event.preventDefault();
-			alert("under construction")
-			//need to toggle star color and boolean for favorite or not
-				//if fav boolean for this wine is true then....
-				//else if false....
-
-			//push wine code value to the array
-			//store array as a string in local storage
-				//localStorage.setItem()
-
-			//add to favorite wines table and make sure to add id=resultLine .  
-			//This table will update as soon as user clicks on fav wine.  If user reclicks, wine will be removed from table(toggle with the boolean)
-				//add favorite wines link to the nav
-
-
-	   	});
 
 
 	});
 
+	//7. Wine Info Page "Add as Favorite Wine button" could go here if we do that (with local storage)
 
+		$("#favoriteButton").on("click", function(event) {
+			event.preventDefault();
+
+			var favWineImageURL = image;
+			var favWineName = name;
+			var favWineType = type;
+			var favWineVintage = vintage;
+			var favWineryCode = winerySearchID;
+			var favWineCode = code;
+
+			//store object in local storage as an obect within a string
+			var newFav = {
+				favWineImageURL: favWineImageURL,
+				favWineName: favWineName,
+				favWineType: favWineType,
+				favWineVintage: favWineVintage,
+				favWineryCode: favWineryCode,
+				favWineCode: favWineCode			
+			}
+
+			favorites.push(newFav);
+			console.log(favorites); //why is this adding extra items sometimes??
+
+			var favString = JSON.stringify(favorites);
+			localStorage.setItem("favorites", favString);
+
+
+		});
+		
 	//8. Favorites page On click functionality
 
 	$("#favoritesPageButton").on("click", function(event) {
 		event.preventDefault();
 
-		$("#favoritesPage").show();
-
 		$("#wineInfoPage").hide();
 		$("#searchData").hide();
 		$("#searchScreen").hide();		 		  	
 	   	$("#wineInfoPage").hide();
+
+		$("#favoritesPage").show();
+
+		//clear page and then populate from the local storage.
+		// $("#favoritesPageData").empty()
+
+		var storedFavorites = localStorage.getItem("favorites");
+		var favArray = JSON.parse(storedFavorites);
+		// console.log(favArray);
+
+		for (var i = 0; i < favArray.length; i++) {
+
+		   	$("#favoritesPageData").append("<tr id='resultLine' winery-id='" + favArray[i].favWineryCode + "' wine-code='" + favArray[i].favWineCode + "'><td><image src='" + favArray[i].favWineImageURL + "'/></td><td>" + favArray[i].favWineName + "</td><td>" + favArray[i].favWineType + "</td><td>" + favArray[i].favWineVintage + "</td></tr>")
+
+		}
+
 
 	});
 
