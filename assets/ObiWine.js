@@ -375,44 +375,56 @@ $(document).ready(function() {
 
 	$("table").on("click", "#deleteFav", function(event) {
 		event.preventDefault();
+		event.stopPropagation();
 
 		//set var to the confirm question boolean
 		var x = confirm("Are you sure you want to delete this Wine from Favorites?");
+
+		var storedFavorites = localStorage.getItem("favorites");
+		var favArray = JSON.parse(storedFavorites);
+		favorites = favArray;
 
 		//if delete confirmed
 		if (x) {
 
 		    //set the id equal to the data-id we set
 		    var id = $(this).attr("data-id")
+		    console.log(id);
+		    console.log(favorites)
 
 		    //remove item with this id from the favorites array
 
-		    //favorites.pop(id);
+			function findIndexByKey(array, key, value) {
+			    for (var i = 0; i < array.length; i++) {
+			        if (array[i].favWineCode === value) {
+			            return array[i];
+			        }
+			    }
+			    return null;
+			}
 
+			var objIndex = findIndexByKey(favorites, 'favWineCode', id);
+			console.log(objIndex);
+			// favorites.splice(objIndex, 1);
 
+		 //    //Re store the new favorites array without that item in local storage
 
+			// console.log(favorites);
 
+			// var favString = JSON.stringify(favorites);
+			// localStorage.setItem("favorites", favString);
 
+			// //clear page and then populate from the local storage.
+			// var storedFavorites = localStorage.getItem("favorites");
+			// var favArray = JSON.parse(storedFavorites);
+			// // console.log(favArray);
+			// $("#favoritesPageData").empty();		
 
+			// for (var i = 0; i < favArray.length; i++) {
 
-		    //Re store the new favorites array without that item in local storage
+			//    	$("#favoritesPageData").append("<tr id='resultLine' winery-id='" + favArray[i].favWineryCode + "' wine-code='" + favArray[i].favWineCode + "'><td><image src='" + favArray[i].favWineImageURL + "'/></td><td>" + favArray[i].favWineName + "</td><td>" + favArray[i].favWineType + "</td><td>" + favArray[i].favWineVintage + "</td><td><button class='btn btn-danger col-md-4 col-md-offset-2 col-xs-4 col-xs-offset-2 col-sm-4 col-sm-offset-2 col-lg-4 col-lg-offset-2' id='deleteFav' data-id=" + favArray[i].favWineCode + "><span class='fa fa-minus'></span></button></td></tr>")
 
-			console.log(favorites);
-
-			var favString = JSON.stringify(favorites);
-			localStorage.setItem("favorites", favString);
-
-			//clear page and then populate from the local storage.
-			var storedFavorites = localStorage.getItem("favorites");
-			var favArray = JSON.parse(storedFavorites);
-			// console.log(favArray);
-			$("#favoritesPageData").empty();		
-
-			for (var i = 0; i < favArray.length; i++) {
-
-			   	$("#favoritesPageData").append("<tr id='resultLine' winery-id='" + favArray[i].favWineryCode + "' wine-code='" + favArray[i].favWineCode + "'><td><image src='" + favArray[i].favWineImageURL + "'/></td><td>" + favArray[i].favWineName + "</td><td>" + favArray[i].favWineType + "</td><td>" + favArray[i].favWineVintage + "</td><td><button class='btn btn-danger col-md-4 col-md-offset-2 col-xs-4 col-xs-offset-2 col-sm-4 col-sm-offset-2 col-lg-4 col-lg-offset-2' id='deleteFav' data-id=" + favArray[i].favWineCode + "><span class='fa fa-minus'></span></button></td></tr>")
-
-				}
+			// 	}
 
 		//else, if delete is not confirmed
 		} else {
