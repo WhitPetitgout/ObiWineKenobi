@@ -385,10 +385,6 @@ $(document).ready(function() {
 		    //set the id equal to the data-id we set
 		    var id = $(this).attr("data-id")
 
-		    //look for the clicked items tr parent (table row), and remove it
-		    //parents looks multiple levels, parent() looks 1 level
-		    $(this).parents("tr").remove();
-
 		    //remove item with this id from the favorites array
 
 		    //favorites.pop(id);
