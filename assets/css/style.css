@@ -16,7 +16,6 @@ body {
 	border-bottom-width: 20px;
 }
 
-
 .jumbotron h1 {
 	font-family:  Satisfy;
 	font-size: 600%;
@@ -81,20 +80,7 @@ nav {
 #favoritesPage {
 	background-color: white;
 	padding: 25px;
-	border-radius: 15px 15px 100px 100px;
-}
-
-
-#wineStem {
-	background-color: white;
-	height: 250px;
-	width: 25px;
-}
-
-#wineBase {
-	background-color: white;
-	height: 10px;
-	width: 300px;
+	border-radius: 15px 15px 50px 50px;
 }
 
 #backButton,
