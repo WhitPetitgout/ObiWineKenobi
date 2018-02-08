@@ -408,13 +408,6 @@ $(document).ready(function() {
 	    console.log(favorites)
 
 
-
-		// //else, if delete is not confirmed
-		// } else {
-		//     console.log("Wine NOT deleted");
-		// }
-
-
 	});
 
 	$(document).on("click", "#yes", function(event) {
