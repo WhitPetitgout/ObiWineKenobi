@@ -9,15 +9,21 @@ body {
 	border-radius: 25px;
 }
 
+#logoimg {
+	height: 75%;
+	width: 100%;
+	margin-top: 25px;
+}
+
 .jumbotron {
-	background-image: url('../images/ObiWine.png'), url('../images/barrel.jpg');
+	background-image: url('../images/barrel.jpg');
 	color: white;
 	border-bottom-style: solid;
 	border-bottom-color: black;
 	border-bottom-width: 20px;
-	background-repeat: no-repeat, repeat;
-	background-position: left bottom, right bottom;
-	background-size: 200px, contain;
+	background-repeat: repeat;
+	background-position: right bottom;
+	background-size: contain;
 }
 
 
@@ -27,7 +33,8 @@ body {
 }
 
 nav {
-	margin-top: 15px;
+	margin-top: 75px;
+	text-align: center;
 }
 
 #userName {
@@ -150,7 +157,8 @@ footer {
 #gifImage {
 	border-radius: 50%;
 }
-.modal-content {
+
+#modal1 {
 	position:center;
 	text-align:center;
 	background-color:maroon;
@@ -158,4 +166,28 @@ footer {
 	height: 80%;
 	width:40%;
 	z-index:100;
+}
+
+#modal2 {
+	display: block;
+	width: 100%;
+	position: center;
+	text-align:center;
+	background-color:maroon;
+	color:white;
+	height: 80%;
+	width:40%;
+	z-index:100;
+}
+
+#yes,
+#no {
+	margin: 5px 15px 15px 5px;
+}
+
+@media screen and (max-width: 1200px) {
+	nav {
+		clear: both;
+		margin: auto;
+	}
 }
