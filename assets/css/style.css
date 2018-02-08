@@ -1,6 +1,7 @@
 
 body {
 	background-image: url("http://dashangel.com/wordpress/wp-content/uploads/2015/08/winery_background.jpg");
+	background-size: cover;
 }
 
 .headerRow {
@@ -9,11 +10,14 @@ body {
 }
 
 .jumbotron {
-	background-image: url('../images/barrel.jpg');
+	background-image: url('../images/ObiWine.png'), url('../images/barrel.jpg');
 	color: white;
 	border-bottom-style: solid;
 	border-bottom-color: black;
 	border-bottom-width: 20px;
+	background-repeat: no-repeat, repeat;
+	background-position: left bottom, right bottom;
+	background-size: 200px, contain;
 }
 
 
@@ -84,6 +88,30 @@ nav {
 	border-radius: 15px 15px 100px 100px;
 }
 
+#favoritesPageData,
+#aboutBody {
+	background-color: rgba(114, 47, 55, .5)
+}
+
+#searchResults,
+form,
+#middle,
+#main,
+#wineryInfo,
+#wineryDetails {
+	background-color: rgba(236, 205, 19, .35)
+}
+
+#aboutBody,
+form,
+#middle,
+#main,
+#wineryInfo,
+#wineryDetails {
+	margin: 10px;
+	border-radius: 0 0 10px 10px;
+	padding: 10px;
+}
 
 #wineStem {
 	background-color: white;

@@ -15,23 +15,27 @@ $(document).ready(function() {
 	var code = "";
 	var winerySearchID = "";
 	var favorites = [];
-    var modal= {
-    	ofAge:function(){
-          $("#modal1").html("<p>Welcome, Jedi! Please enjoy responsibly.</p>");
 
-		},
-    	tooYoung:function(){
-           $("#modal1").html("<p>Please come back when you are of age, young Jedi!</p>");
-    	}
-    	
-
-    	
-    };
 
 //functions
+    var modal = {
+    	ofAge: function() {
+          $("#modal1").html("<p>Welcome, Jedi " + name + "! Please enjoy responsibly.</p>");
+		},
 
+    	tooYoung: function() {
+           $("#modal1").html("<p>Please come back when you are of age, young Padawan!</p>");
+    	}
+    };
 
-
+	function findIndexByKey(array, key, value) {
+	    for (var i = 0; i < array.length; i++) {
+	        if (array[i].favWineCode === value) {
+	            return array[i];
+	        }
+	    }
+	    return null;
+	}
 
 //Events
 
@@ -96,10 +100,9 @@ $(document).ready(function() {
 	//3. Wine Search
 
     $("#searchButton").on("click", function(event) {
+		event.preventDefault();
 
 		$("#searchData").show();  	
-
-		event.preventDefault();
 
 		$("#searchResults").empty();
 
@@ -246,30 +249,25 @@ $(document).ready(function() {
         })
 
 
-	    //6. Back Button
-	    	//within the wineDetail page, there is an onclick for the back button to show previous search results
-	    $("#backButton").on("click", function(event) {
-			event.preventDefault();
-
-		    $("#playButton").attr("data-state", "stopped");
-		    $("#wine-image").html("<img src='" + image + "' width='100%'>");
-
-		 	$("#searchData").show();
-		 	$("#searchScreen").show();		 		  	
-	   		$("#wineInfoPage").hide();
-			
-			if (audioElement.duration > 0 && !audioElement.paused) {
-				audioElement.pause();
-			}
-
-	   	});
-
-
-
-
-
 	});
 	
+	//6. Back Button
+	    //within the wineDetail page, there is an onclick for the back button to show previous search results
+	$("#backButton").on("click", function(event) {
+		event.preventDefault();
+
+	    $("#playButton").attr("data-state", "stopped");
+	    $("#wine-image").html("<img src='" + image + "' width='100%'>");
+
+		$("#searchData").show();
+	 	$("#searchScreen").show();		 		  	
+   		$("#wineInfoPage").hide();
+			
+		if (audioElement.duration > 0 && !audioElement.paused) {
+			audioElement.pause();
+		}
+
+	});
 
 	$("#playButton").on("click", function(event) {
 				
@@ -311,15 +309,25 @@ $(document).ready(function() {
 
 	//7. Wine Info Page "Add as Favorite Wine button" could go here if we do that (with local storage)
 
-		$("#favoriteButton").on("click", function(event) {
-			event.preventDefault();
+	$("#favoriteButton").on("click", function(event) {
+		event.preventDefault();
 
-			var favWineImageURL = image;
-			var favWineName = name;
-			var favWineType = type;
-			var favWineVintage = vintage;
-			var favWineryCode = winerySearchID;
-			var favWineCode = code;
+		var favWineImageURL = image;
+		var favWineName = name;
+		var favWineType = type;
+		var favWineVintage = vintage;
+		var favWineryCode = winerySearchID;
+		var favWineCode = code;
+
+		var storedFavorites = localStorage.getItem("favorites");
+		var favArray = JSON.parse(storedFavorites);
+		favorites = favArray;
+		
+		var objIndex = findIndexByKey(favorites, 'favWineCode', favWineCode);
+		var a = favorites.indexOf(objIndex);
+
+
+		if (a == -1) {
 
 			//store object in local storage as an obect within a string
 			var newFav = {
@@ -337,8 +345,10 @@ $(document).ready(function() {
 			var favString = JSON.stringify(favorites);
 			localStorage.setItem("favorites", favString);
 
-
-		});
+		} else {
+			console.log("already a favorite")
+		}
+	});
 		
 	//8. Favorites page On click functionality
 
@@ -353,7 +363,6 @@ $(document).ready(function() {
 		$("#favoritesPage").show();
 
 		//clear page and then populate from the local storage.
-		// $("#favoritesPageData").empty()
 
 		var storedFavorites = localStorage.getItem("favorites");
 		var favArray = JSON.parse(storedFavorites);
@@ -395,17 +404,7 @@ $(document).ready(function() {
 
 		    //remove item with this id from the favorites array
 
-			function findIndexByKey(array, key, value) {
-			    for (var i = 0; i < array.length; i++) {
-			        if (array[i].favWineCode === value) {
-			            return array[i];
-			        }
-			    }
-			    return null;
-			}
-
 			var objIndex = findIndexByKey(favorites, 'favWineCode', id);
-			console.log(objIndex);
 			var a = favorites.indexOf(objIndex);
 			console.log(a)
 
@@ -432,7 +431,7 @@ $(document).ready(function() {
 
 		//else, if delete is not confirmed
 		} else {
-		    console.log("employee NOT deleted");
+		    console.log("Wine NOT deleted");
 		}
 
 
