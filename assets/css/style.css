@@ -29,8 +29,10 @@ body {
 
 .jumbotron h1 {
 	font-family:  Satisfy;
+	font-weight: bold;
 	font-size: 600%;
 	margin-top: 25px;
+	text-shadow: 2px 5px black;
 }
 
 nav {
