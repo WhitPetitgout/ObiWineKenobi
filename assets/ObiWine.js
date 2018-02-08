@@ -274,7 +274,7 @@ $(document).ready(function() {
 		event.preventDefault();
 
 		var state = $(this).attr("data-state");
-	  	var gifs = ["https://media.giphy.com/media/VtB1RvWAZVauc/giphy.gif", "https://media.giphy.com/media/kvCKFerORxlAI/giphy.gif", "https://media.giphy.com/media/xT8qB7uH9tsDIqW9Es/giphy.gif"];
+	  	var gifs = ["https://media.giphy.com/media/lT2UTn8OKChnW/giphy.gif", "https://media.giphy.com/media/IBiPJxoBgINA4/giphy.gif", "https://media.giphy.com/media/5qIj0FNL88ouY/giphy.gif", "https://media.giphy.com/media/xMbC6ANm2vJrq/giphy.gif", "https://media.giphy.com/media/mpNb3qoFAetMY/giphy.gif"];
 	  	var randomGifURL = gifs[Math.floor(Math.random() * gifs.length)]
 
 
