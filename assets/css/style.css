@@ -150,7 +150,8 @@ footer {
 #gifImage {
 	border-radius: 50%;
 }
-.modal-content {
+
+#modal1 {
 	position:center;
 	text-align:center;
 	background-color:maroon;
@@ -158,4 +159,21 @@ footer {
 	height: 80%;
 	width:40%;
 	z-index:100;
+}
+
+#modal2 {
+	display: block;
+	width: 100%;
+	position: center;
+	text-align:center;
+	background-color:maroon;
+	color:white;
+	height: 80%;
+	width:40%;
+	z-index:100;
+}
+
+#yes,
+#no {
+	margin: 5px 15px 15px 5px;
 }

@@ -15,6 +15,7 @@ $(document).ready(function() {
 	var code = "";
 	var winerySearchID = "";
 	var favorites = [];
+	var id = "";
 
 
 //functions
@@ -27,6 +28,10 @@ $(document).ready(function() {
            $("#modal1").html("<p>Please come back when you are of age, young Padawan!</p>");
     	}
     };
+
+    function deleteWineModal() {
+           $("#modal2").html("<p>Are you sure you'd like to remove this 'pour' choice?</p><button id='yes'>Yes</button><button id='no'>No</button>");
+    	}
 
 	function findIndexByKey(array, key, value) {
 	    for (var i = 0; i < array.length; i++) {
@@ -388,56 +393,70 @@ $(document).ready(function() {
 		event.stopPropagation();
 
 		//set var to the confirm question boolean
-		var x = confirm("Are you sure you want to delete this Wine from Favorites?");
+		// var x = confirm("Are you sure you want to delete this Wine from Favorites?");
+
+		deleteWineModal();
+
 
 		var storedFavorites = localStorage.getItem("favorites");
 		var favArray = JSON.parse(storedFavorites);
 		favorites = favArray;
 
-		//if delete confirmed
-		if (x) {
+	    //set the id equal to the data-id we set
+	    id = $(this).attr("data-id")
+	    console.log(id);
+	    console.log(favorites)
 
-		    //set the id equal to the data-id we set
-		    var id = $(this).attr("data-id")
-		    console.log(id);
-		    console.log(favorites)
 
-		    //remove item with this id from the favorites array
 
-			var objIndex = findIndexByKey(favorites, 'favWineCode', id);
-			var a = favorites.indexOf(objIndex);
-			console.log(a)
-
-			favorites.splice(a, 1);
-
-		    //Re store the new favorites array without that item in local storage
-
-			console.log(favorites);
-
-			var favString = JSON.stringify(favorites);
-			localStorage.setItem("favorites", favString);
-
-			//clear page and then populate from the local storage.
-			var storedFavorites = localStorage.getItem("favorites");
-			var favArray = JSON.parse(storedFavorites);
-			// console.log(favArray);
-			$("#favoritesPageData").empty();		
-
-			for (var i = 0; i < favArray.length; i++) {
-
-			   	$("#favoritesPageData").append("<tr id='resultLine' winery-id='" + favArray[i].favWineryCode + "' wine-code='" + favArray[i].favWineCode + "'><td><image src='" + favArray[i].favWineImageURL + "'/></td><td>" + favArray[i].favWineName + "</td><td>" + favArray[i].favWineType + "</td><td>" + favArray[i].favWineVintage + "</td><td><button class='btn btn-danger col-md-4 col-md-offset-2 col-xs-4 col-xs-offset-2 col-sm-4 col-sm-offset-2 col-lg-4 col-lg-offset-2' id='deleteFav' data-id=" + favArray[i].favWineCode + "><span class='fa fa-minus'></span></button></td></tr>")
-
-				}
-
-		//else, if delete is not confirmed
-		} else {
-		    console.log("Wine NOT deleted");
-		}
+		// //else, if delete is not confirmed
+		// } else {
+		//     console.log("Wine NOT deleted");
+		// }
 
 
 	});
 
+	$(document).on("click", "#yes", function(event) {
+		
+		$("#modal2").html("");
 
+
+	    //remove item with this id from the favorites array
+
+		var objIndex = findIndexByKey(favorites, 'favWineCode', id);
+		var a = favorites.indexOf(objIndex);
+		console.log(a)
+
+		favorites.splice(a, 1);
+
+	    //Re store the new favorites array without that item in local storage
+
+		console.log(favorites);
+
+		var favString = JSON.stringify(favorites);
+		localStorage.setItem("favorites", favString);
+
+		//clear page and then populate from the local storage.
+		var storedFavorites = localStorage.getItem("favorites");
+		var favArray = JSON.parse(storedFavorites);
+		// console.log(favArray);
+		$("#favoritesPageData").empty();		
+
+		for (var i = 0; i < favArray.length; i++) {
+
+		   	$("#favoritesPageData").append("<tr id='resultLine' winery-id='" + favArray[i].favWineryCode + "' wine-code='" + favArray[i].favWineCode + "'><td><image src='" + favArray[i].favWineImageURL + "'/></td><td>" + favArray[i].favWineName + "</td><td>" + favArray[i].favWineType + "</td><td>" + favArray[i].favWineVintage + "</td><td><button class='btn btn-danger col-md-4 col-md-offset-2 col-xs-4 col-xs-offset-2 col-sm-4 col-sm-offset-2 col-lg-4 col-lg-offset-2' id='deleteFav' data-id=" + favArray[i].favWineCode + "><span class='fa fa-minus'></span></button></td></tr>")
+
+		}
+
+	})
+
+	$(document).on("click", "#no", function(event) {
+		console.log("Wine NOT deleted");
+
+		$("#modal2").html("");
+
+	})
 	//10. Contact Page Submit Click functionality 
 		//(Maybe make it send the details as an email to 3 group members when submitted)
 
