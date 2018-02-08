@@ -24,15 +24,18 @@ body {
 	background-repeat: repeat;
 	background-position: right bottom;
 	background-size: contain;
+	padding-bottom: 1px;
+	padding-top: 10px;
 }
 
 
 .jumbotron h1 {
 	font-family:  Satisfy;
 	font-weight: bold;
-	font-size: 600%;
+	font-size: 500%;
 	margin-top: 25px;
 	text-shadow: 2px 5px black;
+	padding-top: 50px;
 }
 
 nav {
@@ -193,4 +196,12 @@ footer {
 		clear: both;
 		margin: auto;
 	}
+}
+
+@media screen and (max-width: 576px) {
+	.jumbotron h1 {
+		padding-top: 0;
+		margin-top: 0;
+	}
+
 }
