@@ -15,6 +15,7 @@ $(document).ready(function() {
 	var code = "";
 	var winerySearchID = "";
 	var favorites = [];
+
 	var modal2= function areYousure(){
 		$("#modal2").html("<p>Are you sure you want to delete this pour choice?</p>");
 	}
@@ -23,19 +24,26 @@ $(document).ready(function() {
     	ofAge:function(){
           $("#modal1").html("<p>Welcome, Jedi! Please enjoy responsibly.</p>");
 
-		},
-    	tooYoung:function(){
-           $("#modal1").html("<p>Please come back when you are of age, young Jedi!</p>");
-    	}
-    	
-
-    	
-    };
 
 //functions
+    var modal = {
+    	ofAge: function() {
+          $("#modal1").html("<p>Welcome, Jedi " + name + "! Please enjoy responsibly.</p>");
+		},
 
+    	tooYoung: function() {
+           $("#modal1").html("<p>Please come back when you are of age, young Padawan!</p>");
+    	}
+    };
 
-
+	function findIndexByKey(array, key, value) {
+	    for (var i = 0; i < array.length; i++) {
+	        if (array[i].favWineCode === value) {
+	            return array[i];
+	        }
+	    }
+	    return null;
+	}
 
 //Events
 
@@ -100,10 +108,9 @@ $(document).ready(function() {
 	//3. Wine Search
 
     $("#searchButton").on("click", function(event) {
+		event.preventDefault();
 
 		$("#searchData").show();  	
-
-		event.preventDefault();
 
 		$("#searchResults").empty();
 
@@ -246,67 +253,63 @@ $(document).ready(function() {
 
 		     });
 
-	    	$("#playButton").on("click", function(event) {
-				
-				event.preventDefault();
-
-		      	var state = $(this).attr("data-state");
-		      	var gifs = ["https://media.giphy.com/media/VtB1RvWAZVauc/giphy.gif", "https://media.giphy.com/media/I8xRafzsDKvUQ/giphy.gif", "https://media.giphy.com/media/kvCKFerORxlAI/giphy.gif", "https://media.giphy.com/media/xT8qB7uH9tsDIqW9Es/giphy.gif"];
-		      	var randomGifURL = gifs[Math.floor(Math.random() * gifs.length)]
-
-
-		        if (state == "stopped") {
-
-		            	audioElement.play();
-		      			$(this).attr("data-state", "playing");
-
-			       	if (audioElement.duration > 0 && !audioElement.paused) {
-
-			       		var newDiv = $("<img src='" + randomGifURL + "' width='100%' id='gifImage'>");
-		      			$("#wine-image").html(newDiv);
-
-					} else {
-
-		      			$(this).attr("data-state", "stopped");
-		      			$("#wine-image").html("<img src='" + image + "' width='100%'>");
-
-					}
-
-
-		       	} else if (state == "playing") {
-
-		            audioElement.pause();
-		      		$(this).attr("data-state", "stopped");
-		      		$("#wine-image").html("<img src='" + image + "' width='100%'>");
-		       	}
-
-
-
-		    });
-
 
         })
 
 
-	    //6. Back Button
-	    	//within the wineDetail page, there is an onclick for the back button to show previous search results
-	    $("#backButton").on("click", function(event) {
-			event.preventDefault();
+	});
+	
+	//6. Back Button
+	    //within the wineDetail page, there is an onclick for the back button to show previous search results
+	$("#backButton").on("click", function(event) {
+		event.preventDefault();
 
-		    $("#playButton").attr("data-state", "stopped");
-		    $("#wine-image").html("<img src='" + image + "' width='100%'>");
+	    $("#playButton").attr("data-state", "stopped");
+	    $("#wine-image").html("<img src='" + image + "' width='100%'>");
 
-		 	$("#searchData").show();
-		 	$("#searchScreen").show();		 		  	
-	   		$("#wineInfoPage").hide();
+		$("#searchData").show();
+	 	$("#searchScreen").show();		 		  	
+   		$("#wineInfoPage").hide();
 			
+		if (audioElement.duration > 0 && !audioElement.paused) {
+			audioElement.pause();
+		}
+
+	});
+
+	$("#playButton").on("click", function(event) {
+				
+		event.preventDefault();
+
+		var state = $(this).attr("data-state");
+	  	var gifs = ["https://media.giphy.com/media/VtB1RvWAZVauc/giphy.gif", "https://media.giphy.com/media/kvCKFerORxlAI/giphy.gif", "https://media.giphy.com/media/xT8qB7uH9tsDIqW9Es/giphy.gif"];
+	  	var randomGifURL = gifs[Math.floor(Math.random() * gifs.length)]
+
+
+		if (state == "stopped") {
+
+		    audioElement.play();
+		    $(this).attr("data-state", "playing");
+
 			if (audioElement.duration > 0 && !audioElement.paused) {
-				audioElement.pause();
+
+				var newDiv = $("<img src='" + randomGifURL + "' width='100%' id='gifImage'>");
+			    $("#wine-image").html(newDiv);
+
+			} else {
+
+			    $(this).attr("data-state", "stopped");
+			    $("#wine-image").html("<img src='" + image + "' width='100%'>");
+
 			}
 
-	   	});
 
+		} else if (state == "playing") {
 
+		    audioElement.pause();
+		    $(this).attr("data-state", "stopped");
+		    $("#wine-image").html("<img src='" + image + "' width='100%'>");
+		}
 
 
 
@@ -314,15 +317,25 @@ $(document).ready(function() {
 
 	//7. Wine Info Page "Add as Favorite Wine button" could go here if we do that (with local storage)
 
-		$("#favoriteButton").on("click", function(event) {
-			event.preventDefault();
+	$("#favoriteButton").on("click", function(event) {
+		event.preventDefault();
 
-			var favWineImageURL = image;
-			var favWineName = name;
-			var favWineType = type;
-			var favWineVintage = vintage;
-			var favWineryCode = winerySearchID;
-			var favWineCode = code;
+		var favWineImageURL = image;
+		var favWineName = name;
+		var favWineType = type;
+		var favWineVintage = vintage;
+		var favWineryCode = winerySearchID;
+		var favWineCode = code;
+
+		var storedFavorites = localStorage.getItem("favorites");
+		var favArray = JSON.parse(storedFavorites);
+		favorites = favArray;
+		
+		var objIndex = findIndexByKey(favorites, 'favWineCode', favWineCode);
+		var a = favorites.indexOf(objIndex);
+
+
+		if (a == -1) {
 
 			//store object in local storage as an obect within a string
 			var newFav = {
@@ -331,7 +344,7 @@ $(document).ready(function() {
 				favWineType: favWineType,
 				favWineVintage: favWineVintage,
 				favWineryCode: favWineryCode,
-				favWineCode: favWineCode			
+				favWineCode: favWineCode
 			}
 
 			favorites.push(newFav);
@@ -340,8 +353,10 @@ $(document).ready(function() {
 			var favString = JSON.stringify(favorites);
 			localStorage.setItem("favorites", favString);
 
-
-		});
+		} else {
+			console.log("already a favorite")
+		}
+	});
 		
 	//8. Favorites page On click functionality
 
@@ -356,7 +371,6 @@ $(document).ready(function() {
 		$("#favoritesPage").show();
 
 		//clear page and then populate from the local storage.
-		// $("#favoritesPageData").empty()
 
 		var storedFavorites = localStorage.getItem("favorites");
 		var favArray = JSON.parse(storedFavorites);
@@ -401,52 +415,47 @@ $(document).ready(function() {
 
 		    //remove item with this id from the favorites array
 
-			function findIndexByKey(array, key, value) {
-			    for (var i = 0; i < array.length; i++) {
-			        if (array[i].favWineCode === value) {
-			            return array[i];
-			        }
-			    }
-			    return null;
-			}
-
 			var objIndex = findIndexByKey(favorites, 'favWineCode', id);
-			console.log(objIndex);
-			// favorites.splice(objIndex, 1);
+			var a = favorites.indexOf(objIndex);
+			console.log(a)
 
-		 //    //Re store the new favorites array without that item in local storage
+			favorites.splice(a, 1);
 
-			// console.log(favorites);
+		    //Re store the new favorites array without that item in local storage
 
-			// var favString = JSON.stringify(favorites);
-			// localStorage.setItem("favorites", favString);
+			console.log(favorites);
 
-			// //clear page and then populate from the local storage.
-			// var storedFavorites = localStorage.getItem("favorites");
-			// var favArray = JSON.parse(storedFavorites);
-			// // console.log(favArray);
-			// $("#favoritesPageData").empty();		
+			var favString = JSON.stringify(favorites);
+			localStorage.setItem("favorites", favString);
 
-			// for (var i = 0; i < favArray.length; i++) {
+			//clear page and then populate from the local storage.
+			var storedFavorites = localStorage.getItem("favorites");
+			var favArray = JSON.parse(storedFavorites);
+			// console.log(favArray);
+			$("#favoritesPageData").empty();		
 
-			//    	$("#favoritesPageData").append("<tr id='resultLine' winery-id='" + favArray[i].favWineryCode + "' wine-code='" + favArray[i].favWineCode + "'><td><image src='" + favArray[i].favWineImageURL + "'/></td><td>" + favArray[i].favWineName + "</td><td>" + favArray[i].favWineType + "</td><td>" + favArray[i].favWineVintage + "</td><td><button class='btn btn-danger col-md-4 col-md-offset-2 col-xs-4 col-xs-offset-2 col-sm-4 col-sm-offset-2 col-lg-4 col-lg-offset-2' id='deleteFav' data-id=" + favArray[i].favWineCode + "><span class='fa fa-minus'></span></button></td></tr>")
+			for (var i = 0; i < favArray.length; i++) {
 
-			// 	}
+			   	$("#favoritesPageData").append("<tr id='resultLine' winery-id='" + favArray[i].favWineryCode + "' wine-code='" + favArray[i].favWineCode + "'><td><image src='" + favArray[i].favWineImageURL + "'/></td><td>" + favArray[i].favWineName + "</td><td>" + favArray[i].favWineType + "</td><td>" + favArray[i].favWineVintage + "</td><td><button class='btn btn-danger col-md-4 col-md-offset-2 col-xs-4 col-xs-offset-2 col-sm-4 col-sm-offset-2 col-lg-4 col-lg-offset-2' id='deleteFav' data-id=" + favArray[i].favWineCode + "><span class='fa fa-minus'></span></button></td></tr>")
+
+				}
 
 		//else, if delete is not confirmed
+
 		//} else {
 		   // console.log("employee NOT deleted");
+
+		//} else {
+		   //  console.log("Wine NOT deleted");
 		//}
 
 
-	});
 
+	});
+}
+};
 
 	//10. Contact Page Submit Click functionality 
 		//(Maybe make it send the details as an email to 3 group members when submitted)
 
 	//11. Other functionalities?
-
-
-
-});
