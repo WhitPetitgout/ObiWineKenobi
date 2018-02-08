@@ -27,11 +27,12 @@ nav {
 }
 
 #userName {
+
 	text-transform: capitalize;
 }
 
 .nav-link {
-	color: white; 
+	color: maroon; 
 }
 
 
@@ -68,7 +69,7 @@ nav {
 
 #searchData,
 #wineInfoPage {
-	margin-top: 20px;
+		margin-top: 20px;
 }
 
 #ageScreen,
@@ -79,7 +80,8 @@ nav {
 #searchData,
 #wineInfoPage,
 #favoritesPage {
-	background-color: white;
+
+	background-color:white;
 	padding: 25px;
 	border-radius: 15px 15px 100px 100px;
 }
@@ -127,7 +129,7 @@ footer {
 	text-align:center;
 	background-color:maroon;
 	color:white;
-	height: 80%;
-	width:40%;
+	height: 100%;
+	width:100%;
 	z-index:100;
 }

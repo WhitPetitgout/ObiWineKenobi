@@ -15,6 +15,10 @@ $(document).ready(function() {
 	var code = "";
 	var winerySearchID = "";
 	var favorites = [];
+	var modal2= function areYousure(){
+		$("#modal2").html("<p>Are you sure you want to delete this pour choice?</p>");
+	}
+	
     var modal= {
     	ofAge:function(){
           $("#modal1").html("<p>Welcome, Jedi! Please enjoy responsibly.</p>");
@@ -377,15 +381,18 @@ $(document).ready(function() {
 		event.preventDefault();
 		event.stopPropagation();
 
+
+
 		//set var to the confirm question boolean
 		var x = confirm("Are you sure you want to delete this Wine from Favorites?");
+		//modal2(areYousure);
 
 		var storedFavorites = localStorage.getItem("favorites");
 		var favArray = JSON.parse(storedFavorites);
 		favorites = favArray;
 
 		//if delete confirmed
-		if (x) {
+		//if () {()
 
 		    //set the id equal to the data-id we set
 		    var id = $(this).attr("data-id")
@@ -427,9 +434,9 @@ $(document).ready(function() {
 			// 	}
 
 		//else, if delete is not confirmed
-		} else {
-		    console.log("employee NOT deleted");
-		}
+		//} else {
+		   // console.log("employee NOT deleted");
+		//}
 
 
 	});
