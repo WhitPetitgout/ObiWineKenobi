@@ -27,11 +27,7 @@ $(document).ready(function() {
 
 	var id = "";
 	
-	favorites.push(testFav);
-	console.log(favorites);
 
-	var testString = JSON.stringify(favorites);
-	localStorage.setItem("favorites", testString);
 
 //functions
     var modal = {
@@ -58,7 +54,18 @@ $(document).ready(function() {
 	}
 
 //Events
+	//create a favorites so that findIndexByKey function will work
+	favorites.push(testFav);
+	
+	//set items to the favorites local storage
+	var items = window.localStorage.getItem('favorites')
 
+	//if localstorage item doesnt exist, create one for the test item (which wont show), else dont reset favorites
+	if (items === null || items.length === 0) {
+
+		var testString = JSON.stringify(favorites);
+		localStorage.setItem("favorites", testString);
+	}
 
 	//1. Check if age is already stored locally
 
