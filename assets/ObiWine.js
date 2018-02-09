@@ -136,7 +136,7 @@ $(document).ready(function() {
     	userSearch = $("#wineSearchInput").val().trim();
     	console.log(userSearch);
 
-    	var queryURL = "https://api.snooth.com/wines/?akey=ncs5n8ji7da3tqv033d1or3daisn244rq6utp037mtx3ogpi&ip=66.28.234.115&t=wine&q=" + userSearch;
+    	var queryURL = "http://api.snooth.com/wines/?akey=ncs5n8ji7da3tqv033d1or3daisn244rq6utp037mtx3ogpi&ip=66.28.234.115&t=wine&q=" + userSearch;
       //var queryURL = "http://api.snooth.com/wines/?akey=ncs5n8ji7da3tqv033d1or3daisn244rq6utp037mtx3ogpi&ip=66.28.234.115&t=wine&q=" + search term
 
 		$.ajax({
@@ -186,9 +186,9 @@ $(document).ready(function() {
 	   	var winery = $(this).attr("winery-id");
 	   	var wine = $(this).attr("wine-code");
 
-	   	var wineryURL = "https://api.snooth.com/winery/?akey=ncs5n8ji7da3tqv033d1or3daisn244rq6utp037mtx3ogpi&ip=66.28.234.115&id=" + winery;
+	   	var wineryURL = "http://api.snooth.com/winery/?akey=ncs5n8ji7da3tqv033d1or3daisn244rq6utp037mtx3ogpi&ip=66.28.234.115&id=" + winery;
 
-     	var wineDetailURL = "https://api.snooth.com/wine/?akey=ncs5n8ji7da3tqv033d1or3daisn244rq6utp037mtx3ogpi&ip=66.28.234.115&id=" + wine + "&food=1&photos=1";
+     	var wineDetailURL = "http://api.snooth.com/wine/?akey=ncs5n8ji7da3tqv033d1or3daisn244rq6utp037mtx3ogpi&ip=66.28.234.115&id=" + wine + "&food=1&photos=1";
 
 	    $.ajax({
 	        url: wineryURL,
@@ -259,7 +259,7 @@ $(document).ready(function() {
 			$("#wine-review").append(review);
 
 	    // 5. Text to Speech on wine detail page (nest within a timeout to start after click, or we can do it on click of a button)
-			var textSpeechURL = "https://api.voicerss.org/?key=a2833f41ad5743d3bfbb43f822503d1c&hl=en-gb&b64=true&src=" + description;
+			var textSpeechURL = "http://api.voicerss.org/?key=a2833f41ad5743d3bfbb43f822503d1c&hl=en-gb&b64=true&src=" + description;
 
 		    $.ajax({
 		        url: textSpeechURL,
